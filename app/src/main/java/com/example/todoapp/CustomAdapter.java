@@ -26,14 +26,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private Activity activity;
     private ArrayList task_id, task, task_date, task_time;
 
-    CustomAdapter(Activity activity, Context context, ArrayList book_id, ArrayList book_title, ArrayList book_author,
-                  ArrayList book_pages){
+    CustomAdapter(Activity activity, Context context, ArrayList task_id, ArrayList task, ArrayList task_date,
+                  ArrayList task_time){
         this.activity = activity;
         this.context = context;
-        this.task_id = book_id;
-        this.task = book_title;
-        this.task_date = book_author;
-        this.task_time = book_pages;
+        this.task_id = task_id;
+        this.task = task;
+        this.task_date = task_date;
+        this.task_time = task_time;
     }
 
     @NonNull
