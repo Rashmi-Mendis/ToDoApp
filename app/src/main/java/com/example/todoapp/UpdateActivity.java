@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class UpdateActivity extends AppCompatActivity {
 
     EditText task_input;
@@ -126,18 +128,23 @@ public class UpdateActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-    private void openDatePicker(){
+    private void openDatePicker() {
+        // Get current date to pre-fill the date picker
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Create a date picker dialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @SuppressLint("SetTextI18n")
             @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
-                //Showing the picked value in the textView
-                date_input.setText(year + "."+ month + "."+ day);
-
+            public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
+                // Display the selected date in the text view
+                date_input.setText(selectedYear + "." + (selectedMonth + 1) + "." + selectedDayOfMonth);
             }
-        }, 2024, 5, 15);
+        }, year, month, dayOfMonth);
 
+        // Show the date picker dialog
         datePickerDialog.show();
     }
 

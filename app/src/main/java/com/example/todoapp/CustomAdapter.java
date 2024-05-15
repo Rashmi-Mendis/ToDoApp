@@ -1,6 +1,7 @@
 package com.example.todoapp;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -46,7 +47,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.task_id_txt.setText(String.valueOf(task_id.get(position)));
         holder.task_txt.setText(String.valueOf(task.get(position)));
         holder.task_date_txt.setText(String.valueOf(task_date.get(position)));
@@ -57,9 +58,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             public void onClick(View view) {
                 Intent intent = new Intent(context, UpdateActivity.class);
                 intent.putExtra("id", String.valueOf(task_id.get(position)));
-                intent.putExtra("title", String.valueOf(task.get(position)));
-                intent.putExtra("author", String.valueOf(task_date.get(position)));
-                intent.putExtra("pages", String.valueOf(task_time.get(position)));
+                intent.putExtra("task", String.valueOf(task.get(position)));
+                intent.putExtra("date", String.valueOf(task_date.get(position)));
+                intent.putExtra("time", String.valueOf(task_time.get(position)));
                 activity.startActivityForResult(intent, 1);
             }
         });

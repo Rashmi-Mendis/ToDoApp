@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.util.Calendar;
+
 public class AddActivity extends AppCompatActivity {
 
     EditText task_input;
@@ -59,19 +61,26 @@ public class AddActivity extends AppCompatActivity {
 
     }
 
-    private void openDatePicker(){
+    private void openDatePicker() {
+        // Get current date to pre-fill the date picker
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Create a date picker dialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                    @Override
+                    public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
+                        // Display the selected date in the text view
+                        date_input.setText(selectedYear + "." + (selectedMonth + 1) + "." + selectedDayOfMonth);
+                    }
+                }, year, month, dayOfMonth);
 
-                //Showing the picked value in the textView
-                date_input.setText(String.valueOf(year)+ "."+String.valueOf(month)+ "."+String.valueOf(day));
-
-            }
-        }, 2024, 05, 15);
-
+        // Show the date picker dialog
         datePickerDialog.show();
     }
+
 
     private void openTimePicker(){
 
@@ -81,7 +90,7 @@ public class AddActivity extends AppCompatActivity {
 
 
                 //Showing the picked value in the textView
-                time_input.setText(String.valueOf(hour)+ ":"+String.valueOf(minute));
+                time_input.setText(hour + ":"+ minute);
 
             }
         }, 15, 30, false);
